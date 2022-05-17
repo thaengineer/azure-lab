@@ -17,7 +17,7 @@ resource "azurerm_resource_group" "RgProd" {
 
 resource "azurerm_virtual_network" "vNetProd" {
   name                = "vNetProd"
-  address_space       = ["10.1.0.0/24"]
+  address_space       = ["10.1.0.0/16"]
   location            = azurerm_resource_group.RgProd.location
   resource_group_name = azurerm_resource_group.RgProd.name
 }
@@ -26,7 +26,7 @@ resource "azurerm_subnet" "sNetProd" {
   name                 = "sNetProd"
   resource_group_name  = azurerm_resource_group.RgProd.name
   virtual_network_name = azurerm_virtual_network.vNetProd.name
-  address_prefixes     = ["10.1.0.0/26"]
+  address_prefixes     = ["10.1.0.0/24"]
 }
 
 resource "azurerm_network_interface" "NIC" {
