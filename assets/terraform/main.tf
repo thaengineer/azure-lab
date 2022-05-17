@@ -12,7 +12,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "RgProd" {
   name     = "${var.prefix}RgProd"
-  location = "westus2"
+  location = var.location
 }
 
 resource "azurerm_virtual_network" "vNetProd" {
