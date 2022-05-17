@@ -11,7 +11,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "RgProd" {
-  name     = "RgProd"
+  name     = "${var.prefix}RgProd"
   location = "westus2"
 }
 
