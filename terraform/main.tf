@@ -1,4 +1,3 @@
-# azure.tf template
 terraform {
   required_providers {
     azurerm = {
