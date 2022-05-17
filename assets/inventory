@@ -1,0 +1,14 @@
+all:
+  hosts:
+    127.0.0.1
+  children:
+    linux:
+      <ip_address>
+    windows:
+      <ip_address>
+    appservers:
+      children:
+        windows:
+    dbservers:
+      children:
+        linux:
