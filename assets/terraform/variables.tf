@@ -1,10 +1,11 @@
-variable "prefix" {
-  description = "This prefix will be included in the name of most resources."
+variable "extension" {
+  description = "This extension will be included in the name of most resources."
+  default     = "01"
 }
 
 variable "location" {
   description = "The region where the virtual network is created."
-  default     = "centralus"
+  default     = "westus2"
 }
 
 variable "address_space" {
@@ -19,22 +20,22 @@ variable "subnet_prefix" {
 
 variable "vm_size" {
   description = "Specifies the size of the virtual machine."
-  default     = "Standard_B1s"
+  default     = "Standard_D2as_v5"
 }
 
 variable "image_publisher" {
   description = "Name of the publisher of the image (az vm image list)"
-  default     = "Canonical"
+  default     = "MicrosoftWindowsServer"
 }
 
 variable "image_offer" {
   description = "Name of the offer (az vm image list)"
-  default     = "UbuntuServer"
+  default     = "WindowsServer"
 }
 
 variable "image_sku" {
   description = "Image SKU to apply (az vm image list)"
-  default     = "16.04-LTS"
+  default     = "2022-Datacenter"
 }
 
 variable "image_version" {
@@ -43,26 +44,11 @@ variable "image_version" {
 }
 
 variable "admin_username" {
-  description = "Administrator user name for linux and mysql"
-  default     = "hashicorp"
+  description = "Administrator user name"
+  default     = "azadmin"
 }
 
 variable "admin_password" {
-  description = "Administrator password for linux and mysql"
-  default     = "Password123!"
-}
-
-variable "height" {
-  default     = "400"
-  description = "Image height in pixels."
-}
-
-variable "width" {
-  default     = "600"
-  description = "Image width in pixels."
-}
-
-variable "placeholder" {
-  default     = "placekitten.com"
-  description = "Image-as-a-service URL. Some other fun ones to try are fillmurray.com, placecage.com, placebeard.it, loremflickr.com, baconmockup.com, placeimg.com, placebear.com, placeskull.com, stevensegallery.com, placedog.net"
+  description = "Administrator password"
+  default     = "Password?123"
 }
