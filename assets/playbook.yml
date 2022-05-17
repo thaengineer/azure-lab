@@ -1,0 +1,51 @@
+---
+- hosts: windows
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Run local powershell script on remote hosts.
+      script: ./<script>.ps1
+
+    - name: Run PowerShell script that modifies the module changed result
+      ansible.windows.win_powershell:
+        script: |
+          if (Get-Service -Name test -ErrorAction SilentlyContinue) {
+              Remove-Service -Name test
+          }
+          else {
+              $Ansible.Changed = $false
+          }
+
+    - name: Run an executable and send data to the stdin for the executable
+      ansible.windows.win_command: powershell.exe -
+      args:
+        stdin: Write-Host "test"
+
+    - name: Create local user account
+      win_user:
+        name: ansible
+        password: 'Ansible?123'
+        state: present
+
+    - name: Download python 3 installer.
+      win_get_url:
+        url: 'https://www.python.org/ftp/python/3.10.4/python-3.10.4-amd64.exe'
+        dest: 'C:\temp\pkgs\python3\python-3.10.4-amd64.exe'
+
+    - name: Install python 3.
+      win_package:
+        path: 'C:\temp\pkgs\python3\python-3.10.4-amd64.exe'
+        arguments: /quiet /PrependPath=1 /InstallAllUsers=1
+        state: present
+
+    - name: Install MSI
+      win_package:
+        path: 'C:\temp\pkgs\Users\Administrator\Downloads\<package>.msi'
+        state: present
+
+
+- hosts: linux
+  become: yes
+  tasks:
+    - name: Check if python is installed.
+      yum: name=python state=present
